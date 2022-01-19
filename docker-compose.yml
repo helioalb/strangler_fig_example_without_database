@@ -3,13 +3,13 @@ version: '3'
 services:
   monolithic:
     build:
-      context: .
+      context: ./monolithic
       args: 
         USER_ID: "${USER_ID}"
         GROUP_ID: "${GROUP_ID}"
     container_name: monolithic
     volumes:
-      - ./:/opt/monolithic
+      - ./monolithic/:/opt/monolithic
     depends_on:
       - monolithic_db
     ports:
