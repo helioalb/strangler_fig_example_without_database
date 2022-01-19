@@ -1,0 +1,26 @@
+# Build command: USER_ID=$(id -u) GROUP_ID=$(id -g) docker-compose build
+version: '3'
+services:
+  monolithic:
+    build:
+      context: .
+      args: 
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
+    container_name: monolithic
+    volumes:
+      - ./:/opt/monolithic
+    depends_on:
+      - monolithic_db
+    ports:
+      - 3000:3000
+  monolithic_db:
+    image: postgres:14.1
+    volumes:
+      - monolithic_data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      - POSTGRES_USER=monolithic
+      - POSTGRES_PASSWORD=monolithic
+volumes:
+  monolithic_data:
