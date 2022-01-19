@@ -16,4 +16,5 @@ RUN chown -R user:user ${BUNDLE_PATH}
 WORKDIR ${INSTALL_PATH}
 
 USER ${USER_ID}
+EXPOSE 3000
 CMD ["/bin/sh"]
